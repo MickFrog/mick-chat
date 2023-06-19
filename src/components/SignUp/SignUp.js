@@ -29,7 +29,7 @@ const  SignUp = () => {
     return ( 
         <div className=' bg-blue-400 h-screen flex flex-col items-center pt-[15%]'>
 
-            {user && <Navigate to='/chat'/>}
+            {user.current && <Navigate to='/chat'/>}
 
             <div className='flex flex-col gap-3 items-center bg-blue-600 rounded p-10'>
                 <LogoComp />
