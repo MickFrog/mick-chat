@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <div className=" h-screen text-3xl font-bold underline grid grid-cols-[1fr_2fr]">
+    <div className=" h-screen text-3xl grid grid-cols-[1fr_3fr]">
       <ChatToast toastMsg="Signed in successfully" />
 
       <SidebarComponent logOutCall={logOutUser}/>
