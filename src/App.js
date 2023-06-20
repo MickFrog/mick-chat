@@ -4,6 +4,8 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 import ChatToast from "./components/ChatToast";
+import SidebarComponent from './components/Chat/SidebarComponent';
+import ChatArea from "./components/Chat/ChatArea";
 
 function App() {
   //controller to navigate user to different page
@@ -20,12 +22,11 @@ function App() {
   }
 
   return (
-    <div className="text-3xl font-bold underline">
-
+    <div className=" h-screen text-3xl font-bold underline grid grid-cols-[1fr_2fr]">
       <ChatToast toastMsg="Signed in successfully" />
 
-      <button className="btn" onClick={logOutUser}>
-        SignOut</button>
+      <SidebarComponent logOutCall={logOutUser}/>
+      <ChatArea />
     </div>
   );
 }
