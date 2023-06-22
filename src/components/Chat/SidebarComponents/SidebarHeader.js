@@ -30,7 +30,7 @@ const SidebarHeader = () => {
                 </Tooltip>
 
                 <Tooltip content="Sign Out" placement="bottom">
-                    <button title="Sign Out" className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover" onClick={handleLogOut}>
+                    <button className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover" onClick={handleLogOut}>
                         <img className="w-8 h-8 rounded" src={signOutImg} alt="signOut"/>
                     </button>
                 </Tooltip>
