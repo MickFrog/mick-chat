@@ -1,5 +1,6 @@
 import React from "react";
 import moonIcon from '../../../images/moonIcon.svg'
+import { Tooltip } from "flowbite-react";
 
 const ChatAreaHeader = () => {
     return (
@@ -13,9 +14,11 @@ const ChatAreaHeader = () => {
                 </div>
             </div>
 
-            <button title="Add Chat" className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover">
-                <img className="w-8 h-8 rounded" src={moonIcon} alt="Toggle theme"/>
-            </button>
+            <Tooltip content="Toggle Theme" placement="left">
+                <button title="Add Chat" className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover">
+                    <img className="w-8 h-8 rounded" src={moonIcon} alt="Toggle theme"/>
+                </button>
+            </Tooltip>
         </div>
     );
 }

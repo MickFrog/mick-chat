@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Avatar } from 'flowbite-react';
+import { Avatar, Tooltip } from 'flowbite-react';
 import signOutImg from '../../../images/signOut.svg'
 import plusImg from '../../../images/plusImg.svg'
 import { AppContext } from "../../../App";
@@ -23,13 +23,17 @@ const SidebarHeader = () => {
             </div>
 
             <div className="flex gap-4">
-                <button title="Add Chat" className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover">
-                    <img className="w-8 h-8 rounded" src={plusImg} alt="signOut"/>
-                </button>
+                <Tooltip content="Add Chat" placement="bottom">
+                    <button className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover">
+                        <img className="w-8 h-8 rounded" src={plusImg} alt="signOut"/>
+                    </button>
+                </Tooltip>
 
-                <button title="Sign Out" className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover" onClick={handleLogOut}>
-                    <img className="w-8 h-8 rounded" src={signOutImg} alt="signOut"/>
-                </button>
+                <Tooltip content="Sign Out" placement="bottom">
+                    <button title="Sign Out" className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover" onClick={handleLogOut}>
+                        <img className="w-8 h-8 rounded" src={signOutImg} alt="signOut"/>
+                    </button>
+                </Tooltip>
             </div>
         </div>
     );
