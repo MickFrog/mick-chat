@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --msgWidth: min(fit-content, 50%);
+}
+
 /* Removes extra white space on right of app on window resizing */
 html, body {
     height: 100vh;
@@ -34,8 +38,16 @@ html, body {
         hover:scrollbar-track-slate-300 scrollbar-thumb-rounded scrollbar-track-rounded;
 }
 
+.chat-message {
+    @apply text-2xl text-white max-w-[50%] p-2 rounded-lg shadow-md overflow-break-word
+}
+
 .chat-bg{
     background-image: url(./images/chatBg.svg);
     background-repeat: no-repeat;
     background-size: cover;
-  }
+}
+
+.overflow-break-word {
+    overflow-wrap: break-word;
+}
