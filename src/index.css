@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-    --msgWidth: min(fit-content, 50%);
+    --chatsContainerHeight: calc(100vh - 150px);
 }
 
 /* Removes extra white space on right of app on window resizing */
@@ -34,7 +34,7 @@ html, body {
     @apply bg-slate-300;
 }
 .my-custom-scrollbar {
-    @apply scrollbar-thin scrollbar-track-slate-200 scrollbar-thumb-slate-400 hover:scrollbar-thumb-slate-500 
+    @apply scrollbar-thin scrollbar-track-slate-200 scrollbar-thumb-slate-600 hover:scrollbar-thumb-slate-800 
         hover:scrollbar-track-slate-300 scrollbar-thumb-rounded scrollbar-track-rounded;
 }
 
