@@ -1,6 +1,6 @@
 import React from "react";
 import SidebarHeader from "./SidebarComponents/SidebarHeader";
-import SidebarChatContainer from "./SidebarComponents/SidebarCatContainer";
+import SidebarChatContainer from "./SidebarComponents/SidebarChatContainer";
 
 
 const SidebarComponent = (props) => {
