@@ -3,7 +3,6 @@ import { auth } from './firebase.config'
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-import ChatToast from "./components/ChatToast";
 import SidebarComponent from './components/Chat/SidebarComponent';
 import ChatArea from "./components/Chat/ChatArea";
 
@@ -27,8 +26,6 @@ function App() {
   return (
     <AppContext.Provider value={logOutUser}>
       <div className=" h-screen text-3xl grid grid-cols-[1fr_3fr]">
-        <ChatToast toastMsg="Signed in successfully" />
-
         <SidebarComponent />
         <ChatArea />
       </div>
