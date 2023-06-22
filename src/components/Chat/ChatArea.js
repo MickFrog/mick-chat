@@ -5,7 +5,7 @@ import ChatAreaFooter from "./ChatAreaComponents/ChatAreaFooter";
 
 const ChatArea = () => {
     return(
-        <div className=" w-[100%] flex flex-col">
+        <div className="flex flex-col">
             <ChatAreaHeader />
             <ChatsContainer />
             <ChatAreaFooter />
