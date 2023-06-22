@@ -14,12 +14,7 @@ const SidebarChatContainer = () => {
             <SidebarChat />
             <SidebarChat />
             <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
+
         </div>
     );
 }
