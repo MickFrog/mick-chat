@@ -11,7 +11,7 @@ const SidebarChat = () => {
 
             <div>
                 <p className="text-xl font-semibold">John Doe</p>
-                <p className="text-base">{tempLastMsg.substring(0, 50)}...</p>
+                <p className="text-base">{tempLastMsg.substring(0, 48)}...</p>
             </div>
         </div>
     );

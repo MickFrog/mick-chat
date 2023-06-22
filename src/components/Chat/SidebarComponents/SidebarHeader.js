@@ -12,7 +12,7 @@ const SidebarHeader = () => {
     }
 
     return(
-        <div className=" w-full p-4 flex justify-between items-center border-b border-b-gray">
+        <div className="sticky bg-blue-300 top-0 w-full p-4 flex justify-between items-center border-b border-b-gray">
             <div className="font-bold flex items-center gap-2">
                 <Avatar
                     alt="avatar picture"

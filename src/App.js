@@ -25,7 +25,7 @@ function App() {
   
   return (
     <AppContext.Provider value={logOutUser}>
-      <div className=" h-screen text-3xl grid grid-cols-[1fr_3fr]">
+      <div className=" h-screen text-3xl grid grid-cols-[28rem_1fr]">
         <SidebarComponent />
         <ChatArea />
       </div>
