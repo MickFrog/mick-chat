@@ -8,10 +8,11 @@ const ChatsContainer = () => {
 
     useEffect(() => {
         messageEndRef.current?.scrollIntoView();
-    }) //messages array dependency supposed to be here
+    }, []) //messages array dependency supposed to be here
 
     return (
-        <div className="h-[--chatsContainerHeight] chat-bg px-4 overflow-auto my-custom-scrollbar">
+        <div className="h-[--chatsContainerHeight] px-4 overflow-auto my-custom-scrollbar 
+            bg-[image:var(--chatBg)] dark:bg-[image:var(--darkChatBg)] bg-no-repeat bg-cover ">
             <ReceivedMessage />
             <ReceivedMessage />
             <ReceivedMessage />

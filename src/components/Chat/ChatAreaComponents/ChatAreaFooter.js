@@ -4,9 +4,9 @@ import sendImg from '../../../images/sendIcon.svg'
 
 const ChatAreaFooter = () => {
     return (
-        <div className="h-[75px] bg-blue-300 p-4 flex gap-2 justify-around items-center">
-            <textarea className=" w-[90%] rounded bg-blue-200 border-0 drop-shadow-sm resize-none my-custom-scrollbar 
-                hover:bg-blue-100 focus:bg-blue-100"
+        <div className="h-[75px] bg-blue-300 p-4 flex gap-2 justify-around items-center light-blue-dark">
+            <textarea className=" w-[90%] rounded bg-blue-200 dark:bg-slate-700 border-0 drop-shadow-sm resize-none my-custom-scrollbar 
+                hover:bg-blue-100 dark:hover:bg-slate-600 focus:bg-blue-100 dark:focus:bg-slate-600"
                 placeholder="Enter your message here...">
 
             </textarea>

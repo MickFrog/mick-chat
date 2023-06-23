@@ -8,7 +8,7 @@ const ReceivedMessage = () => {
                 alt="Large avatar" 
             />
 
-            <div className="chat-message bg-blue-500">
+            <div className="chat-message bg-blue-600 dark:bg-indigo-600">
                 Yo Kalooli, I meant to check on you yesterday but I also don't know what happened things just turned out 
                 to be bad. I guess we shall meet on another special day and complete the talk.
             </div>

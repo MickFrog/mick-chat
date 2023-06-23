@@ -5,10 +5,10 @@ import plusImg from '../../../images/plusImg.svg'
 import { AppContext } from "../../../App";
 
 const SidebarHeader = () => {
-    const { logOustUser } = useContext(AppContext)
+    const { logOutUser } = useContext(AppContext)
 
     const handleLogOut = () => {
-        logOustUser();
+        logOutUser();
     }
 
     return(

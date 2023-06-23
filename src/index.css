@@ -6,6 +6,8 @@
 
 :root {
     --chatsContainerHeight: calc(100vh - 150px);
+    --chatBg: url(./images/chatBg.svg);
+    --darkChatBg: url(./images/darkChatBg.svg);
 }
 
 /* Removes extra white space on right of app on window resizing */
@@ -39,7 +41,11 @@ html, body {
 }
 
 .chat-message {
-    @apply text-2xl text-white max-w-[50%] p-2 rounded-lg shadow-md overflow-break-word
+    @apply text-xl text-white max-w-[50%] p-2 rounded-lg shadow-md overflow-break-word
+}
+
+.overflow-break-word {
+    overflow-wrap: break-word;
 }
 
 .chat-bg{
@@ -48,11 +54,14 @@ html, body {
     background-size: cover;
 }
 
-.overflow-break-word {
-    overflow-wrap: break-word;
+.chat-bg-dark{
+    background-image: url(./images/darkChatBg.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .light-blue-dark {
+    @apply duration-200;
     @apply dark:bg-slate-900;
     @apply dark:text-slate-200;
 }
