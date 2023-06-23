@@ -1,8 +1,22 @@
-import React from "react";
-import moonIcon from '../../../images/moonIcon.svg'
+import React, { useContext, useEffect, useState } from "react";
+import moonIcon from '../../../images/moonIcon.svg';
+import sunIcon from '../../../images/sunIcon.svg';
 import { Tooltip } from "flowbite-react";
+import { AppContext } from "../../../App";
 
 const ChatAreaHeader = () => {
+    const [ themeIcon, setThemeIcon ] = useState(null);             //state to adjust depending on current theme
+    const { theme, handleThemeSwitch } = useContext(AppContext);    //get values from app context
+
+    useEffect(() => { //change theme icon depending on theme
+        if(theme === 'dark') {
+            setThemeIcon(sunIcon);
+            return;
+          }
+          
+          setThemeIcon(moonIcon);
+    }, [theme])
+
     return (
         <div className="sticky top-0 h-[75px] bg-blue-300 p-4 flex justify-between items-center border-b border-b-gray">
             <div className="flex items-center gap-4">
@@ -15,8 +29,8 @@ const ChatAreaHeader = () => {
             </div>
 
             <Tooltip content="Toggle Theme" placement="left">
-                <button className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover">
-                    <img className="w-8 h-8 rounded" src={moonIcon} alt="Toggle theme"/>
+                <button className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover" onClick={handleThemeSwitch}>
+                    <img className="w-8 h-8 rounded" src={themeIcon} alt="Toggle theme"/>
                 </button>
             </Tooltip>
         </div>

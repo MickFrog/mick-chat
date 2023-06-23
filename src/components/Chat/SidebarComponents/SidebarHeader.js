@@ -5,14 +5,14 @@ import plusImg from '../../../images/plusImg.svg'
 import { AppContext } from "../../../App";
 
 const SidebarHeader = () => {
-    const logOustUser = useContext(AppContext)
+    const { logOustUser } = useContext(AppContext)
 
     const handleLogOut = () => {
         logOustUser();
     }
 
     return(
-        <div className="sticky h-[75px] bg-blue-300 top-0 w-full p-4 flex justify-between items-center border-b border-b-gray">
+        <div className="sticky h-[75px] bg-inherit text-slate-950 light-blue-dark top-0 w-full p-4 flex justify-between items-center border-b border-b-gray">
             <div className="font-bold flex items-center gap-2">
                 <Avatar
                     alt="avatar picture"

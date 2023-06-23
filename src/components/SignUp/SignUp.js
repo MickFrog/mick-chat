@@ -24,7 +24,7 @@ const  SignUp = () => {
     useEffect(() => {
         //update user on first render
         user.current = auth.currentUser;
-    })
+    }, []);
 
     return ( 
         <div className=' bg-blue-400 h-screen flex flex-col items-center pt-[15%]'>

@@ -6,6 +6,11 @@ const SentMessage = () => {
             <div className="chat-message bg-blue-800">
                 Yeah, I understand. It'll all be good.
             </div>
+
+            <img className="w-16 h-16 rounded-full"
+                src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.1057706089.1669122497&semt=sph"
+                alt="Large avatar" 
+            />
         </div>
     );
 }

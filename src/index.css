@@ -51,3 +51,8 @@ html, body {
 .overflow-break-word {
     overflow-wrap: break-word;
 }
+
+.light-blue-dark {
+    @apply dark:bg-slate-900;
+    @apply dark:text-slate-200;
+}
