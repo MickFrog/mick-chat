@@ -3,6 +3,7 @@ import { Avatar, Tooltip } from 'flowbite-react';
 import signOutImg from '../../../images/signOut.svg'
 import plusImg from '../../../images/plusImg.svg'
 import { AppContext } from "../../../App";
+import { auth } from "../../../firebase.config";
 
 const SidebarHeader = () => {
     const { logOutUser } = useContext(AppContext)
@@ -16,7 +17,7 @@ const SidebarHeader = () => {
             <div className="font-bold flex items-center gap-2">
                 <Avatar
                     alt="avatar picture"
-                    img="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.1057706089.1669122497&semt=sph"
+                    img={auth.currentUser?.photoURL}
                     rounded
                 />
                 <p>Chats</p>
