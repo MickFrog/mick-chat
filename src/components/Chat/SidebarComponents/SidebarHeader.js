@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Avatar, Tooltip } from 'flowbite-react';
 import signOutImg from '../../../images/signOut.svg'
 import plusImg from '../../../images/plusImg.svg'
 import { AppContext } from "../../../App";
 import { auth } from "../../../firebase.config";
+import SearchModal from "./SearchModal";
 
 const SidebarHeader = () => {
     const { logOutUser } = useContext(AppContext)
+    const [openModal, setOpenModal] = useState(undefined);      //state to control display of search user modal
 
     const handleLogOut = () => {
         logOutUser();
@@ -25,8 +27,8 @@ const SidebarHeader = () => {
 
             <div className="flex gap-4">
                 <Tooltip content="Add Chat" placement="bottom">
-                    <button className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover">
-                        <img className="w-8 h-8 rounded" src={plusImg} alt="signOut"/>
+                    <button className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover" onClick={() => setOpenModal('dismissible')}>
+                        <img className="w-8 h-8 rounded" src={plusImg} alt="addChat"/>
                     </button>
                 </Tooltip>
 
@@ -36,6 +38,9 @@ const SidebarHeader = () => {
                     </button>
                 </Tooltip>
             </div>
+
+            {/* Popup modal for searching user  */}
+            <SearchModal openModal={openModal} onClose={() => setOpenModal(undefined)}/>
         </div>
     );
 }
