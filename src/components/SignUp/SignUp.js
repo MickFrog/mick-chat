@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { auth, googleProvider } from '../../firebase.config';
+import { auth, googleProvider, fireDB } from '../../firebase.config';
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { signInWithPopup } from 'firebase/auth';
 import { Navigate, useNavigate } from 'react-router-dom';
 import LogoComp from './logoComp';
@@ -14,7 +15,22 @@ const  SignUp = () => {
         try{
             //navigate to chat page on successful login
             await signInWithPopup(auth, googleProvider);
-            navigateController('/chat');
+
+            //check whether user registered 
+            const docRef = doc(fireDB, "users", auth.currentUser?.uid);
+            const userDocSnap = await getDoc(docRef);
+
+            //register user if not registered
+            if(!userDocSnap.exists()) {
+                await setDoc(doc(fireDB, "user", auth.currentUser?.uid), {
+                    displayName: auth.currentUser?.displayName,
+                    photoURL: auth.currentUser?.photoURL,
+                    email: auth.currentUser?.email,
+                    userID: auth.currentUser?.uid
+                });
+            }
+
+            navigateController('/chat'); //onSuccess navigate to chats page
         } catch(err) {
             console.error(err);
             alert('Failed to sign in');
