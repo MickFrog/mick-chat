@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth } from './firebase.config'
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 import SidebarComponent from './components/Chat/SidebarComponent';
@@ -14,6 +14,7 @@ function App() {
   const navigateController = useNavigate();
 
   const [ theme, setTheme ] = useState(null); //state to keep track of current theme
+  const [currentUser, setCurrentUser] = useState({});  //state to keep track of current user
 
   const logOutUser = async () => {
     try {
@@ -24,6 +25,14 @@ function App() {
       alert('Failed to Log Out');
     }
   }
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+        setCurrentUser(user);
+    })
+
+    return () => unsub();
+  }, []);
 
   //useEffect to check preferred user scheme
   useEffect(() => {
@@ -50,7 +59,7 @@ function App() {
   }
   
   return (
-    <AppContext.Provider value={{logOutUser, theme, handleThemeSwitch}}>
+    <AppContext.Provider value={{currentUser, logOutUser, theme, handleThemeSwitch}}>
       <div className=" h-screen text-3xl grid grid-cols-[28rem_1fr]">
         <SidebarComponent />
         <ChatArea />

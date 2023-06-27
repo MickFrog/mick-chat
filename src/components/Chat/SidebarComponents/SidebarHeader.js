@@ -3,11 +3,10 @@ import { Avatar, Tooltip } from 'flowbite-react';
 import signOutImg from '../../../images/signOut.svg'
 import plusImg from '../../../images/plusImg.svg'
 import { AppContext } from "../../../App";
-import { auth } from "../../../firebase.config";
 import SearchModal from "./SearchModal";
 
 const SidebarHeader = () => {
-    const { logOutUser } = useContext(AppContext)
+    const { logOutUser, currentUser } = useContext(AppContext)
     const [openModal, setOpenModal] = useState(undefined);      //state to control display of search user modal
 
     const handleLogOut = () => {
@@ -19,7 +18,7 @@ const SidebarHeader = () => {
             <div className="font-bold flex items-center gap-2">
                 <Avatar
                     alt="avatar picture"
-                    img={auth.currentUser?.photoURL}
+                    img={currentUser.photoURL}
                     rounded
                 />
                 <p>Chats</p>

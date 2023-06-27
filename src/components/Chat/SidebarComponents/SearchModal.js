@@ -1,13 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal } from 'flowbite-react';
 import searchImg from '../../../images/searchImg.svg';
-import { auth, fireDB } from '../../../firebase.config';
+import { fireDB } from '../../../firebase.config';
 import { collection, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { AppContext } from '../../../App';
 
 const SearchModal = (props) => {
   //using anonymous function on this element causes re-rendering of parents thus it too when using state.
   const searchInput = document.getElementById('searchInput');
+
+  const { currentUser } = useContext(AppContext)
 
   // Documents were being fetched twice leading to duplicate documents in user Array ref
   // so this isLoaded keeps track of whether documents have already been fetched on mount and prevent it 
@@ -27,7 +30,7 @@ const SearchModal = (props) => {
         const querySnapshot = await getDocs(collection(fireDB, "user"));  
 
         querySnapshot.forEach((doc) => {
-          if(doc.data().userID === auth.currentUser?.uid) return;
+          if(doc.data().userID === currentUser.uid) return;
           users.current.push(doc.data())
         });
 
@@ -37,7 +40,7 @@ const SearchModal = (props) => {
     }
 
     fetchDocs();
-  }, [])
+  }, [currentUser.uid])
 
   const handleKey = (e) => {
     //run search when user presses enter within search input
@@ -54,11 +57,14 @@ const SearchModal = (props) => {
     );
   };
 
-  const handleUserSelect = useCallback(async (user) => {
+  const handleUserSelect = async (user) => {
+    //start by closing the modal popup
+    props.onClose();
+
     //chats btn 2 people to be stored by combined IDs
-    const combinedId = auth.currentUser?.uid > user.userID 
-      ? auth.currentUser?.uid + user.userID 
-      : user.userID + auth.currentUser?.uid;
+    const combinedId = currentUser.uid > user.userID 
+      ? currentUser.uid + user.userID 
+      : user.userID + currentUser.uid;
 
     try {
       //check if chat btn current user and selected user exists if not create one 
@@ -70,7 +76,7 @@ const SearchModal = (props) => {
 
         //update userChat in userChats collection to store chat information
         //each userChat doc stores chat info with other users
-        await updateDoc(doc(fireDB, "userChats", auth.currentUser?.uid), { //for current user
+        await updateDoc(doc(fireDB, "userChats", currentUser.uid), { //for current user
           [combinedId + '.userInfo']: {
             userId: user.userID,
             displayName: user.displayName,
@@ -81,9 +87,9 @@ const SearchModal = (props) => {
 
         await updateDoc(doc(fireDB, "userChats", user.userID), { //for other user
           [combinedId + '.userInfo']: {
-            userId: auth.currentUser?.uid,
-            displayName: auth.currentUser?.displayName,
-            photoURL: auth.currentUser?.photoURL,
+            userId: currentUser.uid,
+            displayName: currentUser.displayName,
+            photoURL: currentUser.photoURL,
           },
           [combinedId + '.date']: serverTimestamp(),
         });
@@ -92,7 +98,7 @@ const SearchModal = (props) => {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  };
 
   return ReactDOM.createPortal(
     <Modal dismissible show={props.openModal === 'dismissible'} onClose={props.onClose} size="md">
