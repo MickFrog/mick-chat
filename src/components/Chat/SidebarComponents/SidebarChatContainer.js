@@ -12,7 +12,7 @@ const SidebarChatContainer = () => {
     useEffect(() => {
         const fetchChats = () => {
             const unsub = onSnapshot(doc(fireDB, "userChats", currentUser.uid), (doc) => {
-                console.log("Current data: ", doc.data());
+                setChats(doc.data());
             });
 
             return () => { //clean up resources of snapshot listener
@@ -26,15 +26,11 @@ const SidebarChatContainer = () => {
 
     return (
         <div className="flex flex-col overflow-y-auto my-custom-scrollbar">
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
-            <SidebarChat />
+            {Object.entries(chats)?.sort((a, b) => b[1].date - a[1].date) //convert object to array + sort starting from latest date
+                .map((chatInfo) => {
+                // 0 - userId, 1 - userInfo (object)
+                return <SidebarChat key={chatInfo[0]} chatInfo={chatInfo[1]}/>
+            })}
 
         </div>
     );

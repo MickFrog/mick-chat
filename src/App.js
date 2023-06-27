@@ -26,7 +26,7 @@ function App() {
     }
   }
 
-  useEffect(() => {
+  useEffect(() => { //update current user on app mounting
     const unsub = onAuthStateChanged(auth, (user) => {
         setCurrentUser(user);
     })
