@@ -3,10 +3,12 @@ import moonIcon from '../../../images/moonIcon.svg';
 import sunIcon from '../../../images/sunIcon.svg';
 import { Tooltip } from "flowbite-react";
 import { AppContext } from "../../../App";
+import { ChatContext } from "../../../ChatContext";
 
 const ChatAreaHeader = () => {
     const [ themeIcon, setThemeIcon ] = useState(null);             //state to adjust depending on current theme
     const { theme, handleThemeSwitch } = useContext(AppContext);    //get values from app context
+    const { data } = useContext(ChatContext);                       // data of current state of active user in chat context
 
     useEffect(() => { //change theme icon depending on theme
         if(theme === 'dark') {
@@ -20,11 +22,11 @@ const ChatAreaHeader = () => {
     return (
         <div className="sticky top-0 h-[75px] bg-blue-300 p-4 light-blue-dark flex justify-between items-center border-b border-b-gray">
             <div className="flex items-center gap-4">
-                <img className="w-16 h-16 rounded-full"
-                    src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.1057706089.1669122497&semt=sph"
-                    alt="Large avatar" />
+                {data.userInfo.photoURL && <img className="w-14 h-14 rounded-full"
+                    src={data.userInfo?.photoURL}
+                    alt="Large avatar" />}
                 <div>
-                    <p className="text-2xl font-semibold">John Doe</p>
+                    <p className="text-2xl font-semibold">{data.userInfo?.displayName}</p>
                 </div>
             </div>
 

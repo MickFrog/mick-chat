@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import SidebarComponent from './components/Chat/SidebarComponent';
 import ChatArea from "./components/Chat/ChatArea";
+import { ChatContextProvider } from "./ChatContext";
 
 //context to provide app wide values
 export const AppContext = React.createContext();
@@ -60,10 +61,12 @@ function App() {
   
   return (
     <AppContext.Provider value={{currentUser, logOutUser, theme, handleThemeSwitch}}>
-      <div className=" h-screen text-3xl grid grid-cols-[28rem_1fr]">
-        <SidebarComponent />
-        <ChatArea />
-      </div>
+      <ChatContextProvider>
+        <div className=" h-screen text-3xl grid grid-cols-[28rem_1fr]">
+          <SidebarComponent />
+          <ChatArea />
+        </div>
+      </ChatContextProvider>
     </AppContext.Provider>
   );
   
