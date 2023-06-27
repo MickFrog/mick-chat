@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal } from 'flowbite-react';
 import searchImg from '../../../images/searchImg.svg';
@@ -6,14 +6,16 @@ import { auth, fireDB } from '../../../firebase.config';
 import { collection, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 const SearchModal = (props) => {
-  //using anonymous function on this element causes re-rendering of parents thus it too
-  // const searchInput = document.getElementById('searchInput');
+  //using anonymous function on this element causes re-rendering of parents thus it too when using state.
+  const searchInput = document.getElementById('searchInput');
 
   // Documents were being fetched twice leading to duplicate documents in user Array ref
   // so this isLoaded keeps track of whether documents have already been fetched on mount and prevent it 
   // from happening again
   const isLoaded = useRef(false);
+
   const users = useRef([]);       //array of document objects retrieved from firestore
+  const [searchedUsers, setSearchedUsers] = useState([]);
 
   useEffect(() => {
     const fetchDocs = async () => {
@@ -36,6 +38,21 @@ const SearchModal = (props) => {
 
     fetchDocs();
   }, [])
+
+  const handleKey = (e) => {
+    //run search when user presses enter within search input
+    e.code === 'Enter' && handleSearch()
+  }
+  
+  const handleSearch = () => {      //filter users according to user search username
+    if(searchInput.value === "") return;
+
+    setSearchedUsers(
+      users.current.filter((elem) => 
+      elem.displayName.toLowerCase()
+      .includes(searchInput.value.toLowerCase()))
+    );
+  };
 
   const handleUserSelect = useCallback(async (user) => {
     //chats btn 2 people to be stored by combined IDs
@@ -84,9 +101,10 @@ const SearchModal = (props) => {
                 <input id='searchInput' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
                     w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" 
                     placeholder="Search user" 
+                    onKeyDown={handleKey}
                 />
 
-                <button className="py-1 px-1 rounded shadow text-xl btn-white btn-white:hover" >
+                <button className="py-1 px-1 rounded shadow text-xl btn-white btn-white:hover" onClick={handleSearch}>
                     <img className="w-10 h-7 rounded" src={searchImg} alt="searchUser"/>
                 </button>
             </div>
@@ -94,8 +112,8 @@ const SearchModal = (props) => {
 
         <Modal.Body>
           <div className="h-60 overflow-y-auto my-custom-scrollbar">
-          {users.current.length !== 0 && 
-            users.current.map((userDoc) => {
+          {searchedUsers.length !== 0 && 
+            searchedUsers.map((userDoc) => {
               return (
                 <div key={userDoc.userID} className='rounded flex gap-4 items-center p-2 hover:bg-neutral-500 hover:bg-opacity-70 hover:cursor-pointer'
                   onClick={() => handleUserSelect(userDoc)}>
