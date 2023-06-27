@@ -16,18 +16,25 @@ const  SignUp = () => {
             //navigate to chat page on successful login
             await signInWithPopup(auth, googleProvider);
 
-            //check whether user registered 
-            const docRef = doc(fireDB, "users", auth.currentUser?.uid);
+            //check whether user registered in user + userChats collections
+            const docRef = doc(fireDB, "user", auth.currentUser?.uid);
+            const userChatsDocRef = doc(fireDB, "userChats", auth.currentUser?.uid)
+
             const userDocSnap = await getDoc(docRef);
+            const userChatsDocSnap = await getDoc(userChatsDocRef);
 
             //register user if not registered
             if(!userDocSnap.exists()) {
-                await setDoc(doc(fireDB, "user", auth.currentUser?.uid), {
+                await setDoc(doc(fireDB, "user", auth.currentUser?.uid), {  //register user in user collection
                     displayName: auth.currentUser?.displayName,
                     photoURL: auth.currentUser?.photoURL,
                     email: auth.currentUser?.email,
                     userID: auth.currentUser?.uid
                 });
+            }
+            
+            if(!userChatsDocSnap.exists()) {
+                await setDoc(doc(fireDB, "userChats", auth.currentUser?.uid), {}) //to store chat info about a user
             }
 
             navigateController('/chat'); //onSuccess navigate to chats page

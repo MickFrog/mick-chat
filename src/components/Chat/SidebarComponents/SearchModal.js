@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal } from 'flowbite-react';
 import searchImg from '../../../images/searchImg.svg';
 import { auth, fireDB } from '../../../firebase.config';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 const SearchModal = (props) => {
   //using anonymous function on this element causes re-rendering of parents thus it too
@@ -21,7 +21,7 @@ const SearchModal = (props) => {
         if (isLoaded.current) return; //prevent re-fetching of docs
 
         isLoaded.current = true;
-        //fetch all users and add to user array available apart from current user
+        //fetch all available users and add to users array apart from current user
         const querySnapshot = await getDocs(collection(fireDB, "user"));  
 
         querySnapshot.forEach((doc) => {
@@ -36,6 +36,46 @@ const SearchModal = (props) => {
 
     fetchDocs();
   }, [])
+
+  const handleUserSelect = useCallback(async (user) => {
+    //chats btn 2 people to be stored by combined IDs
+    const combinedId = auth.currentUser?.uid > user.userID 
+      ? auth.currentUser?.uid + user.userID 
+      : user.userID + auth.currentUser?.uid;
+
+    try {
+      //check if chat btn current user and selected user exists if not create one 
+      const docSnapshot = await getDoc(doc(fireDB, "chats", combinedId));
+
+      if(!docSnapshot.exists()) {
+        //create the chat in chats collection
+        await setDoc(doc(fireDB, "chats", combinedId), { messages: [] }); //messages array to store all messages btn 2 users
+
+        //update userChat in userChats collection to store chat information
+        //each userChat doc stores chat info with other users
+        await updateDoc(doc(fireDB, "userChats", auth.currentUser?.uid), { //for current user
+          [combinedId + '.userInfo']: {
+            userId: user.userID,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          },
+          [combinedId + '.date']: serverTimestamp(),
+        });
+
+        await updateDoc(doc(fireDB, "userChats", user.userID), { //for other user
+          [combinedId + '.userInfo']: {
+            userId: auth.currentUser?.uid,
+            displayName: auth.currentUser?.displayName,
+            photoURL: auth.currentUser?.photoURL,
+          },
+          [combinedId + '.date']: serverTimestamp(),
+        });
+      }
+
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
 
   return ReactDOM.createPortal(
     <Modal dismissible show={props.openModal === 'dismissible'} onClose={props.onClose} size="md">
@@ -57,7 +97,8 @@ const SearchModal = (props) => {
           {users.current.length !== 0 && 
             users.current.map((userDoc) => {
               return (
-                <div key={userDoc.userID} className='flex gap-4 items-center p-2'>
+                <div key={userDoc.userID} className='rounded flex gap-4 items-center p-2 hover:bg-neutral-500 hover:bg-opacity-70 hover:cursor-pointer'
+                  onClick={() => handleUserSelect(userDoc)}>
                   <img className="w-6 h-6 rounded-full" 
                     src={userDoc.photoURL} 
                     alt="user avatar" 
