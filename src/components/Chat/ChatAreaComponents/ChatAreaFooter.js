@@ -15,7 +15,7 @@ const ChatAreaFooter = () => {
 
     const handleSendMessage = async () => {
         //prevent sending empty msg + sending message when no chat selected
-        if(newMsg === "" || data.userInfo === {}) return; 
+        if(newMsg === "" || data.chatId === '') return; 
 
         try {
             //update messages array btn user chatting in chats collection
@@ -51,10 +51,13 @@ const ChatAreaFooter = () => {
         }
     }
 
+    const textClassname = `${data.chatId === '' ? "cursor-not-allowed" : ''} w-[90%] rounded bg-blue-200 dark:bg-slate-700 border-0 drop-shadow-sm 
+        resize-none my-custom-scrollbar hover:bg-blue-100 dark:hover:bg-slate-600 focus:bg-blue-100 dark:focus:bg-slate-600`
+    
     return (
         <div className="h-[75px] bg-blue-300 p-4 flex gap-2 justify-around items-center light-blue-dark">
-            <textarea className=" w-[90%] rounded bg-blue-200 dark:bg-slate-700 border-0 drop-shadow-sm resize-none my-custom-scrollbar 
-                hover:bg-blue-100 dark:hover:bg-slate-600 focus:bg-blue-100 dark:focus:bg-slate-600"
+            <textarea disabled={data.chatId === '' ? "disabled" : ''} 
+                className={textClassname}
                 placeholder="Enter your message here..." onChange={(e) => setNewMsg(e.target.value)} value={newMsg}>
 
             </textarea>

@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../../../../App";
 
-const SentMessage = () => {
+const SentMessage = (props) => {
+    const { currentUser } = useContext(AppContext);
+
     return (
-        <div className="flex items-center justify-end gap-2 py-2">
+        <div className="flex items-start justify-end gap-2 py-2">
             <div className="chat-message bg-sky-600">
-                Yeah, I understand. It'll all be good.
+                {props.msgText}
             </div>
 
             <img className="w-16 h-16 rounded-full"
-                src="https://img.freepik.com/free-vector/mysterious-mafia-man-smoking-cigarette_52683-34828.jpg?size=626&ext=jpg&ga=GA1.1.1057706089.1669122497&semt=sph"
+                src={currentUser.photoURL}
                 alt="Large avatar" 
             />
         </div>
