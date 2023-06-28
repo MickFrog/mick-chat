@@ -1,18 +1,22 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { auth, googleProvider, fireDB } from "../../firebase.config";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { signInWithPopup } from "firebase/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import LogoComp from "./logoComp";
+import { Spinner } from "flowbite-react";
 
 const SignUp = () => {
   //currently logged in user
   const user = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const navigateController = useNavigate();
 
   const signInUser = async () => {
     try {
+      setLoading(true); //load spinner on button
+
       //navigate to chat page on successful login
       await signInWithPopup(auth, googleProvider);
 
@@ -43,6 +47,8 @@ const SignUp = () => {
       console.error(err);
       alert("Failed to sign in");
     }
+
+    setLoading(false); //remove spinner
   };
 
   useEffect(() => {
@@ -57,8 +63,21 @@ const SignUp = () => {
       <div className="flex flex-col gap-3 items-center bg-blue-600 rounded p-10">
         <LogoComp />
 
-        <button className="btn btn-blue" onClick={signInUser}>
-          Sign In With Google
+        <button
+          disabled={loading}
+          className={
+            loading ? "btn btn-blue cursor-not-allowed" : "btn btn-blue"
+          }
+          onClick={signInUser}
+        >
+          {loading ? (
+            <div>
+              <Spinner />
+              <span className="px-2">Signing in...</span>
+            </div>
+          ) : (
+            "Sign In With Google"
+          )}
         </button>
       </div>
     </div>
