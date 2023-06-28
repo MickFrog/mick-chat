@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 import { Modal } from "flowbite-react";
 import searchImg from "../../../images/searchImg.svg";
-import { fireDB } from "../../../firebase.config";
+import { auth, fireDB } from "../../../firebase.config";
 import {
   collection,
   doc,
@@ -38,7 +38,8 @@ const SearchModal = (props) => {
         const querySnapshot = await getDocs(collection(fireDB, "user"));
 
         querySnapshot.forEach((doc) => {
-          if (doc.data().userID === currentUser.uid) return;
+          //use currentUser from auth obj because this effect runs before currentUser in AppContext is updated
+          if (doc.data().userID === auth.currentUser.uid) return;
           users.current.push(doc.data());
         });
       } catch (err) {
@@ -142,6 +143,11 @@ const SearchModal = (props) => {
 
       <Modal.Body>
         <div className="h-60 overflow-y-auto my-custom-scrollbar">
+          {searchedUsers.length === 0 && (
+            <div className="flex justify-center dark:text-slate-200">
+              No Search Results
+            </div>
+          )}
           {searchedUsers.length !== 0 &&
             searchedUsers.map((userDoc) => {
               return (
