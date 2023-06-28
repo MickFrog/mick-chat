@@ -5,7 +5,6 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { fireDB } from "../../../firebase.config";
 import { ChatContext } from "../../../ChatContext";
 import { AppContext } from "../../../App";
-import uniqid from 'uniqid';
 
 const ChatsContainer = () => {
     //reference to scroll automatically to bottom of messages whenever the messages change
@@ -36,8 +35,14 @@ const ChatsContainer = () => {
     return (
         <div className="h-[--chatsContainerHeight] px-4 overflow-auto my-custom-scrollbar 
             bg-[image:var(--chatBg)] dark:bg-[image:var(--darkChatBg)] bg-no-repeat bg-cover ">
+            
+            {messages.length === 0 && 
+                <div className="flex items-center justify-center h-full w-full">
+                    <p className="text-3xl dark:text-slate-200 font-semibold">Select a chat to start chatting</p>
+                </div>
+            }
 
-            {
+            {messages.length > 0 && 
                 messages.map((msg) => {
                     return msg.senderId === currentUser.uid 
                     ? <SentMessage key={msg.msgId} msgText={msg.msgText}/>
