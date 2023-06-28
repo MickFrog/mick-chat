@@ -4,7 +4,7 @@ import { ChatContext } from "../../../ChatContext";
 
 const SidebarChat = (props) => {
   const { userInfo } = props.chatInfo;
-  const { lastMessageText } = props.chatInfo.lastMessage;
+  const lastMessageText = props.chatInfo.lastMessage?.lastMessageText;
   const { dispatch } = useContext(ChatContext);
 
   const handleChatSelect = () => {
@@ -26,11 +26,13 @@ const SidebarChat = (props) => {
 
       <div>
         <p className="text-xl font-semibold">{userInfo.displayName}</p>
-        <p className="text-base">
-          {lastMessageText.length < 48
-            ? lastMessageText
-            : lastMessageText.substring(0, 48) + "..."}
-        </p>
+        {lastMessageText && (
+          <p className="text-base">
+            {lastMessageText.length < 48
+              ? lastMessageText
+              : lastMessageText.substring(0, 48) + "..."}
+          </p>
+        )}
       </div>
     </div>
   );
