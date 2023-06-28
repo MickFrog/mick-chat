@@ -12,7 +12,7 @@ const firebaseConfig = {
   projectId: "friendlychat-c49f1",
   storageBucket: "friendlychat-c49f1.appspot.com",
   messagingSenderId: "901345479911",
-  appId: "1:901345479911:web:e2ef221cc3508e0cc0e642"
+  appId: "1:901345479911:web:e2ef221cc3508e0cc0e642",
 };
 
 // Initialize Firebase

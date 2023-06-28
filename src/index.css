@@ -1,67 +1,68 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --chatsContainerHeight: calc(100vh - 150px);
-    --chatBg: url(./images/chatBg.svg);
-    --darkChatBg: url(./images/darkChatBg.svg);
+  --chatsContainerHeight: calc(100vh - 150px);
+  --chatBg: url(./images/chatBg.svg);
+  --darkChatBg: url(./images/darkChatBg.svg);
 }
 
 /* Removes extra white space on right of app on window resizing */
-html, body {
-    height: 100vh;
-    width: 100vw;
-    padding: 0;
-    margin: 0;
-    overflow-x: hidden;
+html,
+body {
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 /* My css component classes */
 .btn {
-    @apply font-bold font-nunito py-2 px-4 rounded shadow text-xl;
+  @apply font-bold font-nunito py-2 px-4 rounded shadow text-xl;
 }
 .btn-blue {
-    @apply bg-blue-500 text-white;
+  @apply bg-blue-500 text-white;
 }
 .btn-blue:hover {
-    @apply bg-blue-700;
+  @apply bg-blue-700;
 }
 .btn-white {
-    @apply bg-white text-black;
+  @apply bg-white text-black;
 }
 .btn-white:hover {
-    @apply bg-slate-300;
+  @apply bg-slate-300;
 }
 .my-custom-scrollbar {
-    @apply scrollbar-thin scrollbar-track-slate-200 scrollbar-thumb-slate-600 hover:scrollbar-thumb-slate-800 
+  @apply scrollbar-thin scrollbar-track-slate-200 scrollbar-thumb-slate-600 hover:scrollbar-thumb-slate-800 
         hover:scrollbar-track-slate-300 scrollbar-thumb-rounded scrollbar-track-rounded;
 }
 
 .chat-message {
-    @apply text-xl text-white max-w-[50%] p-2 rounded-lg shadow-md overflow-break-word
+  @apply text-xl text-white max-w-[50%] p-2 rounded-lg shadow-md overflow-break-word;
 }
 
 .overflow-break-word {
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-.chat-bg{
-    background-image: url(./images/chatBg.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
+.chat-bg {
+  background-image: url(./images/chatBg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.chat-bg-dark{
-    background-image: url(./images/darkChatBg.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
+.chat-bg-dark {
+  background-image: url(./images/darkChatBg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .light-blue-dark {
-    @apply duration-200;
-    @apply dark:bg-slate-900;
-    @apply dark:text-slate-200;
+  @apply duration-200;
+  @apply dark:bg-slate-900;
+  @apply dark:text-slate-200;
 }
