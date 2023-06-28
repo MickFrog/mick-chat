@@ -7,17 +7,23 @@ const SidebarChat = (props) => {
   const lastMessageText = props.chatInfo.lastMessage?.lastMessageText;
   const { dispatch } = useContext(ChatContext);
 
+  const { data } = useContext(ChatContext);
+
   const handleChatSelect = () => {
     //change state of active user in Chat context
     dispatch({ type: "CHANGE_ACTIVE_CHAT", payload: userInfo });
   };
 
+  // visually show active chat in sidebar
+  const chatClassName = ` ${
+    data.userInfo.userId === userInfo.userId
+      ? "bg-blue-500 dark:bg-gray-600"
+      : "bg-blue-400 dark:bg-slate-800 hover:bg-blue-500 dark:hover:bg-gray-600"
+  } ease-in-out duration-200 flex items-center 
+    gap-2 px-1 py-2 border-b border-b-gray cursor-pointer`;
+
   return (
-    <div
-      className="bg-blue-400 dark:bg-slate-800 hover:bg-blue-500 dark:hover:bg-gray-600 ease-in-out duration-200 flex items-center 
-            gap-2 px-1 py-2 border-b border-b-gray cursor-pointer"
-      onClick={handleChatSelect}
-    >
+    <div className={chatClassName} onClick={handleChatSelect}>
       <img
         className="w-14 h-14 rounded-full"
         src={userInfo.photoURL}
