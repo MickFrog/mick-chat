@@ -2,7 +2,7 @@
 
 This is a Chat App created as a part of The Odin Project in the Javascript course of the NodeJS path.
 
-The live app can be checked out [here](https://mickfrog.github.io/mick-chat)
+The live app can be checked out [here](https://friendlychat-c49f1.web.app)
 
 ## Features
 
