@@ -57,6 +57,18 @@ const ChatAreaFooter = () => {
     }
   };
 
+  const handleSendKey = (e) => {
+    //go to next line on shift+Enter
+    if (e.code === "Enter" && e.shiftKey) {
+      e.preventDefault();
+      setNewMsg(newMsg + "\n");
+      return;
+    }
+
+    //send message when enter key is pressed
+    e.code === "Enter" && handleSendMessage();
+  };
+
   const textClassname = `${
     data.chatId === "" ? "cursor-not-allowed" : ""
   } w-[90%] rounded bg-blue-200 dark:bg-slate-700 border-0 drop-shadow-sm 
@@ -70,6 +82,7 @@ const ChatAreaFooter = () => {
         placeholder="Enter your message here..."
         onChange={(e) => setNewMsg(e.target.value)}
         value={newMsg}
+        onKeyDown={handleSendKey}
       ></textarea>
 
       <Tooltip content="Send Message" placement="top">
