@@ -14,13 +14,13 @@ const SidebarHeader = () => {
   };
 
   return (
-    <div className="sticky h-[75px] bg-inherit text-slate-950 light-blue-dark top-0 w-full p-4 flex justify-between items-center border-b border-b-gray">
+    <div className="sticky h-[75px] bg-inherit text-slate-950 light-blue-dark top-0 w-full p-4 flex justify-between items-center border-b border-b-gray max-lg:flex-col max-lg:gap-2 max-lg:h-max">
       <div className="font-bold flex items-center gap-2">
         <Avatar alt="avatar picture" img={currentUser.photoURL} rounded />
-        <p>Chats</p>
+        <p className="max-lg:hidden">Chats</p>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 max-lg:flex-col max-lg:gap-1">
         <Tooltip content="Add Chat" placement="bottom">
           <button
             className="py-1 px-1 rounded-full shadow text-xl btn-white btn-white:hover"

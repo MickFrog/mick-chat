@@ -20,7 +20,7 @@ const SidebarChat = (props) => {
       ? "bg-blue-500 dark:bg-gray-600"
       : "bg-blue-400 dark:bg-slate-800 hover:bg-blue-500 dark:hover:bg-gray-600"
   } ease-in-out duration-200 flex items-center 
-    gap-2 px-1 py-2 border-b border-b-gray cursor-pointer`;
+    gap-2 px-1 py-2 border-b border-b-gray cursor-pointer max-lg:justify-center`;
 
   return (
     <div className={chatClassName} onClick={handleChatSelect}>
@@ -30,7 +30,7 @@ const SidebarChat = (props) => {
         alt="Large avatar"
       />
 
-      <div>
+      <div className="max-lg:hidden">
         <p className="text-xl font-semibold">{userInfo.displayName}</p>
         {lastMessageText && (
           <p className="text-base">

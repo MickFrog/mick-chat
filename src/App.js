@@ -65,7 +65,7 @@ function App() {
       value={{ currentUser, logOutUser, theme, handleThemeSwitch }}
     >
       <ChatContextProvider>
-        <div className=" h-screen text-3xl grid grid-cols-[28rem_1fr]">
+        <div className="h-screen text-3xl grid grid-cols-[28rem_1fr] max-lg:grid-cols-[4.8rem_1fr]">
           <SidebarComponent />
           <ChatArea />
         </div>
