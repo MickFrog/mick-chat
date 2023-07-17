@@ -72,7 +72,7 @@ const ChatAreaFooter = () => {
   const textClassname = `${
     data.chatId === "" ? "cursor-not-allowed" : ""
   } w-[90%] rounded bg-blue-200 dark:bg-slate-700 border-0 drop-shadow-sm 
-        resize-none my-custom-scrollbar hover:bg-blue-100 dark:hover:bg-slate-600 focus:bg-blue-100 dark:focus:bg-slate-600`;
+        resize-none my-custom-scrollbar hover:bg-blue-100 dark:hover:bg-slate-600 focus:bg-blue-100 dark:focus:bg-slate-600 max-md:text-base`;
 
   return (
     <div className="h-[75px] bg-blue-300 p-4 flex gap-2 justify-around items-center light-blue-dark">
@@ -90,7 +90,11 @@ const ChatAreaFooter = () => {
           className="py-1 px-1 rounded shadow text-xl btn-white btn-white:hover"
           onClick={handleSendMessage}
         >
-          <img className="w-8 h-8 rounded" src={sendImg} alt="Toggle theme" />
+          <img
+            className="w-8 h-8 rounded max-md:w-6 max-md:h-6"
+            src={sendImg}
+            alt="Toggle theme"
+          />
         </button>
       </Tooltip>
     </div>
