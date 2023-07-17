@@ -4,7 +4,7 @@ import SidebarChatContainer from "./SidebarComponents/SidebarChatContainer";
 
 const SidebarComponent = () => {
   return (
-    <div className="border-r border-r-gray flex flex-col bg-blue-300 light-blue-dark font-nunito relative h-full overflow-y-hidden">
+    <div className="border-r border-r-gray flex flex-col bg-blue-300 light-blue-dark relative h-full overflow-y-hidden">
       <SidebarHeader />
 
       <SidebarChatContainer />
