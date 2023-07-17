@@ -42,7 +42,7 @@ body {
 }
 
 .chat-message {
-  @apply text-xl text-white max-w-[50%] p-2 rounded-lg shadow-md overflow-break-word;
+  @apply text-xl text-white max-w-[50%] p-2 rounded-lg shadow-md overflow-break-word max-md:text-base max-md:max-w-[90%];
 }
 
 .overflow-break-word {

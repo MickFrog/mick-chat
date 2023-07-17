@@ -7,7 +7,7 @@ const ReceivedMessage = (props) => {
   return (
     <div className="flex items-start gap-2 py-2">
       <img
-        className="w-14 h-14 rounded-full"
+        className="w-14 h-14 rounded-full max-md:hidden"
         src={data.userInfo.photoURL}
         alt="Large avatar"
       />

@@ -41,7 +41,7 @@ const ChatsContainer = () => {
     >
       {messages.length === 0 && (
         <div className="flex items-center justify-center h-full w-full">
-          <p className="text-3xl dark:text-slate-200 font-semibold">
+          <p className="text-3xl dark:text-slate-200 font-semibold max-sm:text-base">
             Select a chat to start chatting
           </p>
         </div>

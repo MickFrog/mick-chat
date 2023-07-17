@@ -21,17 +21,19 @@ const ChatAreaHeader = () => {
   }, [theme]);
 
   return (
-    <div className="sticky top-0 h-[75px] bg-blue-300 p-4 light-blue-dark flex justify-between items-center border-b border-b-gray">
+    <div className="h-[75px] bg-blue-300 p-4 light-blue-dark flex justify-between items-center border-b border-b-gray max-md:h-max max-sm:flex-col max-sm:gap2">
       <div className="flex items-center gap-4">
         {data.userInfo.photoURL && (
           <img
-            className="w-14 h-14 rounded-full"
+            className="w-14 h-14 rounded-full max-sm:hidden"
             src={data.userInfo?.photoURL}
             alt="Large avatar"
           />
         )}
         <div>
-          <p className="text-2xl font-semibold">{data.userInfo?.displayName}</p>
+          <p className="text-2xl font-semibold max-md:text-base">
+            {data.userInfo?.displayName}
+          </p>
         </div>
       </div>
 

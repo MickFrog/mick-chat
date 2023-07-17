@@ -9,7 +9,7 @@ const SentMessage = (props) => {
       <div className="chat-message bg-sky-600">{props.msgText}</div>
 
       <img
-        className="w-14 h-14 rounded-full"
+        className="w-14 h-14 rounded-full max-md:hidden"
         src={currentUser.photoURL}
         alt="Large avatar"
       />
